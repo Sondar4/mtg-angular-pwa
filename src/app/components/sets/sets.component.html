@@ -1,0 +1,37 @@
+<h1>Magic The Gathering Expansions</h1>
+
+<div *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>
+
+<table mat-table *ngIf="loaded" [dataSource]="sets" class="mat-elevation-z8 animate__animated animate__backInUp">
+
+  <ng-container matColumnDef="code">
+    <th mat-header-cell *matHeaderCellDef> Code </th>
+    <td mat-cell *matCellDef="let set"> {{ set.code.toUpperCase() }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let set"> {{ set.name }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="ncards">
+    <th mat-header-cell *matHeaderCellDef> # Cards </th>
+    <td mat-cell *matCellDef="let set"> {{ set.card_count }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="release">
+    <th mat-header-cell *matHeaderCellDef> Release Date </th>
+    <td mat-cell *matCellDef="let set"> {{ set.released_at }} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['code', 'name', 'ncards', 'release']"></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: ['code', 'name', 'ncards', 'release'];"
+    [routerLink]="['/set/', row.code]"
+    class="set-row"
+  ></tr>
+
+</table>
