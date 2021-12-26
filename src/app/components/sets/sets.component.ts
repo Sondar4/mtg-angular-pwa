@@ -16,11 +16,9 @@ export class SetsComponent implements OnInit {
 
   ngOnInit(): void {
     this.setsService
-      .getAllSets()
-      .subscribe((res) => {
-        this.sets = res.data.filter((set) => {
-          return set.set_type == 'expansion' && !set.digital
-        })
+      .getAllExpansions()
+      .subscribe((sets) => {
+        this.sets = sets;
         this.loading = false;
         this.loaded = true;
     });
